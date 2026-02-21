@@ -27,7 +27,7 @@ jobs:
             -h ${{ secrets.SUPABASE_DB_HOST }} \
             -p 5432 \
             -U ${{ secrets.SUPABASE_DB_USER }} \
-            -d postgres \
+            -d ${{ secrets.SUPABASE_DB_NAME }} \
             -n gold \
             -F c \
             -f gold_backup.dump \
