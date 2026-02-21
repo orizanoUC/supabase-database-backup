@@ -29,7 +29,6 @@ jobs:
             -n gold \
             -F c \
             -f gold_backup.dump \
-            --sslmode=require
 
       - name: Upload backup artifact
         uses: actions/upload-artifact@v4
