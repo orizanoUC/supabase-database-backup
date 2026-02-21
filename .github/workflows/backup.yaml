@@ -1,0 +1,39 @@
+name: supabse-backup
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 5 * * *" #Corre todos los días en UTC
+
+  jobs:
+    backup:
+      runs-on: ubuntu-latest
+
+      steps:
+        -name: Checkout repository
+         uses: actions/Checkout@v4
+
+         -name: Install PostgreSQL client
+          run: |
+            sudo apt update
+            sudo apt install -y postgresql-client
+
+          -name: Run pg_dump (gold schema only)
+           env:
+              PGPASSWORD: ${{secrets.Wacom200226@}}
+           run: |
+            pg_dump \
+              -h db.IC_2026-1.supabase.co \
+              -U postgres \
+              -d postgres \
+              -n gold \
+              -F c \
+              -f gold_backup.dump \
+              --sslmode=require
+
+          -name: Upload backup artifact
+           uses: actions/upload-artifact@v4
+           with:
+              name: gold-backup
+              path: gold_backup.dump 
+
