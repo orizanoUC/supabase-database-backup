@@ -21,9 +21,11 @@ jobs:
       - name: Run pg_dump (gold schema only)
         env:
           PGPASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+          PGSSLMODE: require
         run: |
           pg_dump \
             -h ${{ secrets.SUPABASE_DB_HOST }} \
+            -p 5432 \
             -U ${{ secrets.SUPABASE_DB_USER }} \
             -d postgres \
             -n gold \
