@@ -20,7 +20,7 @@ on:
 
           -name: Run pg_dump (gold schema only)
            env:
-              PGPASSWORD: ${{secrets.Wacom200226@}}
+              PGPASSWORD: ${{secrets.SUPABASE_DB_PASSWORD}}
            run: |
             pg_dump \
               -h db.IC_2026-1.supabase.co \
